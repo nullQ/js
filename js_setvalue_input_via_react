@@ -1,0 +1,20 @@
+
+/**
+* @param inputDom 输入框DOM 比如：document.getElementById('userId')
+* @newText 新的文本
+*/
+function changeReactInputValue(inputDom,newText){
+	let lastValue = inputDom.value;
+	inputDom.value = newText;
+	let event = new Event('input', { bubbles: true });
+	event.simulated = true;
+	let tracker = inputDom._valueTracker;
+	if (tracker) {
+  	tracker.setValue(lastValue);
+	}
+	inputDom.dispatchEvent(event);
+}
+
+//使用方法
+var userIdDom = document.getElementById('userId');		//普通JS获取输入框Dom
+changeReactInputValue(userIdDom,'xxxxx');			//改变React的输入框的值
